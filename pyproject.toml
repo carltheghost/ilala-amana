@@ -1,0 +1,19 @@
+[project]
+name = "ilala-amana"
+version = "0.1.0"
+description = "A small coordinator agent that routes work to specialist sub-agents and larger model/tool backends."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+  { name = "Ilala Amana" }
+]
+
+[project.scripts]
+supersub = "supersub_agency.cli:main"
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["supersub_agency*"]
