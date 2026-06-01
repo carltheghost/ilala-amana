@@ -37,19 +37,19 @@ guarantee profit or safely trade/spend on its own.
 ## Run it
 
 ```bash
-python -m supersub_agency "help me sell a product online and ship it" --budget 250
+python3 -m supersub_agency "help me sell a product online and ship it" --budget 250
 ```
 
 Structured JSON output:
 
 ```bash
-python -m supersub_agency "research stocks and simulate a plan" --budget 1000 --json
+python3 -m supersub_agency "research stocks and simulate a plan" --budget 1000 --json
 ```
 
 Run tests:
 
 ```bash
-python -m unittest discover
+python3 -m unittest discover -s tests
 ```
 
 ## How to make it powerful
