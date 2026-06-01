@@ -10,6 +10,10 @@ authors = [
 
 [project.scripts]
 supersub = "supersub_agency.cli:main"
+supersub-desktop = "supersub_agency.desktop.server:run_desktop"
+
+[tool.setuptools.package-data]
+supersub_agency = ["static/desktop/*"]
 
 [build-system]
 requires = ["setuptools>=69"]

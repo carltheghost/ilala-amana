@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SuperSub — 4D Command Deck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Outfit:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <canvas id="hyperspace" aria-hidden="true"></canvas>
+    <div class="chromatic-vignette" aria-hidden="true"></div>
+    <div class="scanlines" aria-hidden="true"></div>
+
+    <div class="deck" id="deck">
+      <header class="top-bar glass">
+        <div class="brand">
+          <span class="brand-glyph">◈</span>
+          <div>
+            <h1>SuperSub Agency</h1>
+            <p class="subtitle">4D Command Deck · Cloud-class surface</p>
+          </div>
+        </div>
+        <div class="top-metrics">
+          <div class="metric" data-depth="1">
+            <span class="metric-label">Temporal slice</span>
+            <span class="metric-value" id="time-slice">T+0</span>
+          </div>
+          <div class="metric" data-depth="2">
+            <span class="metric-label">Hyper depth</span>
+            <span class="metric-value" id="hyper-depth">4.00</span>
+          </div>
+          <div class="metric risk-pill" id="risk-pill">IDLE</div>
+        </div>
+      </header>
+
+      <aside class="dock glass" aria-label="Command dock">
+        <button class="dock-item active" data-panel="mission" title="Mission composer">
+          <span class="dock-icon">✦</span>
+          <span>Mission</span>
+        </button>
+        <button class="dock-item" data-panel="capabilities" title="Provider lanes">
+          <span class="dock-icon">◎</span>
+          <span>Lanes</span>
+        </button>
+        <button class="dock-item" data-panel="response" title="Agency output">
+          <span class="dock-icon">⬡</span>
+          <span>Output</span>
+        </button>
+        <div class="dock-spacer"></div>
+        <button class="dock-item" id="btn-focus-core" title="Focus agency core">
+          <span class="dock-icon">◇</span>
+          <span>Core</span>
+        </button>
+      </aside>
+
+      <main class="workspace">
+        <div class="agency-core" id="agency-core" aria-hidden="true">
+          <div class="core-ring ring-a"></div>
+          <div class="core-ring ring-b"></div>
+          <div class="core-ring ring-c"></div>
+          <div class="core-nucleus"></div>
+          <span class="core-label">COORDINATOR</span>
+        </div>
+
+        <section class="panel glass panel-mission active" id="panel-mission" data-panel="mission">
+          <header class="panel-head">
+            <h2>Mission Composer</h2>
+            <p>Describe what the agency should plan — same power as the CLI, in spatial form.</p>
+          </header>
+          <textarea
+            id="mission-input"
+            rows="5"
+            placeholder="e.g. Help me sell a product online, ship it, and draft ad creative under $500…"
+          ></textarea>
+          <div class="composer-row">
+            <label class="budget-field">
+              <span>Budget cap (USD)</span>
+              <input type="number" id="budget-input" min="0" step="50" placeholder="Optional" />
+            </label>
+            <button type="button" class="btn-primary" id="btn-run-mission">
+              <span class="btn-glow"></span>
+              Launch mission
+            </button>
+          </div>
+          <div class="quick-missions">
+            <span class="quick-label">Quick vectors</span>
+            <button type="button" class="chip" data-mission="help me sell a product online and ship it">
+              Commerce + ship
+            </button>
+            <button type="button" class="chip" data-mission="research stocks and simulate a plan">
+              Finance sim
+            </button>
+            <button
+              type="button"
+              class="chip"
+              data-mission="make a cartoon video and analyze screenshots, audio, and scenes"
+            >
+              Omni media
+            </button>
+          </div>
+        </section>
+
+        <section class="panel glass panel-capabilities" id="panel-capabilities" data-panel="capabilities">
+          <header class="panel-head">
+            <h2>Model &amp; Tool Lanes</h2>
+            <p>Provider mixer — OpenClaw, Hermes, AgentClaw, VisionScout, and more.</p>
+          </header>
+          <div class="lane-grid" id="lane-grid">
+            <p class="loading">Scanning hyperspace lanes…</p>
+          </div>
+        </section>
+
+        <section class="panel glass panel-response" id="panel-response" data-panel="response">
+          <header class="panel-head">
+            <h2>Agency Transmission</h2>
+            <p id="response-meta">Run a mission to see routing, tools, and approval gates.</p>
+          </header>
+          <div class="response-hero" id="response-hero">
+            <div class="hero-intent" id="hero-intent">—</div>
+            <div class="hero-specialist" id="hero-specialist">Awaiting mission</div>
+          </div>
+          <div class="tool-stream" id="tool-stream"></div>
+          <details class="gates-fold" id="gates-fold">
+            <summary>Human approval gates</summary>
+            <ul id="gates-list"></ul>
+          </details>
+        </section>
+      </main>
+
+      <footer class="status-bar glass">
+        <span id="status-text">Command deck online · drag panels in depth-space</span>
+        <span class="status-hint">Parallax follows pointer · scroll to shift W-axis</span>
+      </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.min.js"></script>
+    <script src="/static/app.js" type="module"></script>
+  </body>
+</html>

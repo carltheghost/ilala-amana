@@ -8,7 +8,8 @@ This repository is a **single Python CLI package** (`ilala-amana` / SuperSub Age
 
 | Component | Role | How to run |
 |-----------|------|------------|
-| SuperSub CLI | Only runnable product; routes missions in-process | `python3 -m supersub_agency "<mission>"` or `supersub "<mission>"` after editable install |
+| SuperSub CLI | Routes missions in-process | `python3 -m supersub_agency "<mission>"` or `supersub "<mission>"` |
+| 4D Command Deck | Browser UI (WebGL + glass desktop) | `python3 -m supersub_agency --desktop` → http://127.0.0.1:8765/ |
 | Unit tests | Verification (not a daemon) | `python3 -m unittest discover -s tests` |
 
 No ports are opened. Provider lanes (OpenClaw, Hermes, etc.) are in-process stubs only.
@@ -19,6 +20,7 @@ See `README.md` for full examples. Quick reference:
 
 - **Install (editable):** `pip install -e .` (Python ≥3.11)
 - **Tests:** `python3 -m unittest discover -s tests`
+- **Visual desktop:** `python3 -m supersub_agency --desktop`
 - **Run agent:** `python3 -m supersub_agency "your mission" --budget 250`
 - **JSON output:** add `--json`
 - **List lanes:** `python3 -m supersub_agency --capabilities`
