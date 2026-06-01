@@ -24,6 +24,10 @@ def assess_risk(request: TaskRequest, intent: Intent) -> RiskLevel:
     text = request.text.lower()
     if intent == Intent.FINANCE:
         return RiskLevel.HIGH
+    if intent == Intent.MEDIA and any(
+        term in text for term in ("camera", "microphone", "watch", "detect", "record", "live")
+    ):
+        return RiskLevel.HIGH
     if any(term in text for term in MONEY_MOVING_TERMS):
         return RiskLevel.HIGH
     if request.budget_usd and request.budget_usd > 0:
@@ -46,6 +50,10 @@ def approval_gates(request: TaskRequest, intent: Intent) -> list[str]:
     if "sell" in request.text.lower() or "store" in request.text.lower():
         gates.append(
             "Publishing listings, charging customers, or sending outreach requires approval."
+        )
+    if intent == Intent.MEDIA:
+        gates.append(
+            "Camera, microphone, live watch, face/identity, and generated media publishing require approval and consent."
         )
     if request.budget_usd:
         gates.append(f"Budget cap: ${request.budget_usd:,.2f}. Spending requires approval.")

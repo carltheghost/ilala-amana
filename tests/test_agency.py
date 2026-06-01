@@ -34,6 +34,18 @@ class AgencyAgentTests(unittest.TestCase):
         self.assertEqual(response.intent, Intent.OPERATIONS)
         self.assertGreaterEqual(len(response.tool_results), 1)
 
+    def test_routes_multimodal_cartoon_video_requests_to_media(self) -> None:
+        response = AgencyAgent().handle(
+            TaskRequest(text="Make a cartoon video and watch screenshots to detect objects")
+        )
+
+        self.assertEqual(response.intent, Intent.MEDIA)
+        self.assertEqual(response.specialist, "OmniMedia Studio")
+        self.assertEqual(response.risk_level, RiskLevel.HIGH)
+        self.assertTrue(any("VisionScout" in capability for capability in response.capabilities))
+        self.assertTrue(any(result.tool_name == "cartoon-studio" for result in response.tool_results))
+        self.assertTrue(response.gated_actions)
+
 
 if __name__ == "__main__":
     unittest.main()

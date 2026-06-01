@@ -12,6 +12,7 @@ class Intent(StrEnum):
     COMMERCE = "commerce"
     FINANCE = "finance"
     LOGISTICS = "logistics"
+    MEDIA = "media"
     CONTENT = "content"
     OPERATIONS = "operations"
     GENERAL = "general"
@@ -55,6 +56,7 @@ class AgencyResponse:
     risk_level: RiskLevel
     summary: str
     tool_results: list[ToolResult]
+    capabilities: list[str] = field(default_factory=list)
     gated_actions: list[str] = field(default_factory=list)
 
     def as_markdown(self) -> str:
@@ -69,8 +71,18 @@ class AgencyResponse:
             "",
             self.summary,
             "",
-            "## Tool output",
+            "## Capability stack",
         ]
+
+        if self.capabilities:
+            lines.extend(f"- {capability}" for capability in self.capabilities)
+        else:
+            lines.append("- No extra capabilities selected.")
+
+        lines.extend([
+            "",
+            "## Tool output",
+        ])
 
         for result in self.tool_results:
             approval = " (approval required)" if result.requires_approval else ""

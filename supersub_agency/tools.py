@@ -132,3 +132,79 @@ class CreativePlannerTool(Tool):
                 "Review claims before publishing ads or product pages.",
             ],
         )
+
+
+class MultimodalSensorTool(Tool):
+    name = "multimodal-sensor-planner"
+
+    def run(self, request: TaskRequest) -> ToolResult:
+        return ToolResult(
+            tool_name=self.name,
+            summary=(
+                "Designed a perception layer so the agency can accept images, audio, video, screenshots, "
+                "camera feeds, documents, and sensor logs, then route them to vision, audio, and reasoning lanes."
+            ),
+            next_steps=[
+                "Add image input for OCR, object detection, scene summaries, and visual QA.",
+                "Add audio input for transcription, sound detection, speaker notes, and sentiment review.",
+                "Add video input for frame sampling, event detection, timeline summaries, and clip selection.",
+                "Require consent and purpose logging before using camera, microphone, or live watch mode.",
+            ],
+            requires_approval=True,
+        )
+
+
+class DetectionWatchTool(Tool):
+    name = "detect-watch-planner"
+
+    def run(self, request: TaskRequest) -> ToolResult:
+        return ToolResult(
+            tool_name=self.name,
+            summary=(
+                "Prepared a watch-and-detect workflow: define what to observe, sample frames/audio, detect "
+                "events, score confidence, alert only on thresholds, and store an audit trail."
+            ),
+            next_steps=[
+                "Keep watch mode off by default and start it only for owned/consented media sources.",
+                "Use bounded retention so recordings and detections expire automatically.",
+                "Add human review for sensitive detections such as people, identity, health, or security events.",
+            ],
+            requires_approval=True,
+        )
+
+
+class CartoonStudioTool(Tool):
+    name = "cartoon-studio"
+
+    def run(self, request: TaskRequest) -> ToolResult:
+        return ToolResult(
+            tool_name=self.name,
+            summary=(
+                "Built a cartoon production plan: concept, character sheet, world style, three-act outline, "
+                "storyboard beats, voice directions, and generation prompts for each scene."
+            ),
+            next_steps=[
+                "Generate character turnarounds and expression sheets with an image model.",
+                "Create storyboard panels before animating to control cost and consistency.",
+                "Use the same seed/style guide for every shot so the cartoon keeps its identity.",
+            ],
+        )
+
+
+class VideoStudioTool(Tool):
+    name = "video-studio"
+
+    def run(self, request: TaskRequest) -> ToolResult:
+        return ToolResult(
+            tool_name=self.name,
+            summary=(
+                "Prepared a video pipeline: script, shot list, asset prompts, voiceover plan, music/SFX notes, "
+                "edit decision list, captions, and publishing checklist."
+            ),
+            next_steps=[
+                "Connect text-to-video or animation tools for generated clips.",
+                "Render small previews first, then upscale approved shots.",
+                "Add rights checks for music, fonts, voices, likeness, and commercial use.",
+            ],
+            requires_approval=True,
+        )
