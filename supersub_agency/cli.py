@@ -32,11 +32,33 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="List all model/tool lanes in the provider mixer.",
     )
+    parser.add_argument(
+        "--desktop",
+        action="store_true",
+        help="Launch the 4D visual command deck in your browser.",
+    )
+    parser.add_argument(
+        "--port",
+        type=int,
+        default=8765,
+        help="Port for --desktop (default: 8765).",
+    )
+    parser.add_argument(
+        "--no-browser",
+        action="store_true",
+        help="With --desktop, do not auto-open a browser tab.",
+    )
     return parser
 
 
 def main() -> None:
     args = build_parser().parse_args()
+    if args.desktop:
+        from supersub_agency.desktop import run_desktop
+
+        run_desktop(port=args.port, open_browser=not args.no_browser)
+        return
+
     if args.capabilities:
         mixer = ProviderMixer()
         for provider in mixer.providers:

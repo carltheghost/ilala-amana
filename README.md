@@ -41,6 +41,21 @@ guarantee profit or safely trade/spend on its own.
 
 ## Run it
 
+### Visual 4D command deck (browser)
+
+A Cursor Cloud–style spatial desktop: hyperspace WebGL, glass panels, dock, and live
+routing into the same agency backend as the CLI.
+
+```bash
+python3 -m supersub_agency --desktop
+# or: supersub --desktop --port 8765
+```
+
+Then open **http://127.0.0.1:8765/** — compose missions, browse provider lanes, and
+read specialist output in floating panels with parallax depth.
+
+### CLI
+
 ```bash
 python3 -m supersub_agency "help me sell a product online and ship it" --budget 250
 ```
